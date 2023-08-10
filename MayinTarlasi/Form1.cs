@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace MayinTarlasi
 {
     public partial class Form1 : Form
@@ -38,9 +39,12 @@ namespace MayinTarlasi
         private void button_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            if (true)
+            field _field =btn.Tag as field;
+            if (_field.IsItBomb)
             {
-                MessageBox.Show("Patladı");
+                MessageBox.Show("Boom \n" + (_field.x + " " + _field.y));
+                
+                
             }
             else
             {
@@ -60,7 +64,6 @@ namespace MayinTarlasi
             if (tb_MineCount.Text == string.Empty)
             {
                 mineCount = 5;
-                
             }
             else
             {
@@ -91,6 +94,7 @@ namespace MayinTarlasi
                     btn.Size = new Size(20, 20);
                     btn.Location = new Point(20 * x, 20 * y);
                     btn.Click += new EventHandler(button_Click);
+                    btn.Tag = _field;
                     _field.button = btn;
 
                     fieldList.Add(_field);
@@ -105,6 +109,9 @@ namespace MayinTarlasi
                 if (!templist.Contains(temp))
                 {
                     templist.Add(temp);
+                    fieldList[temp].IsItBomb = true;
+                    ((field)(fieldList[temp].button.Tag)).IsItBomb = true;
+
                     fieldList[temp].button.BackColor = Color.Red;
                 }
                 else
