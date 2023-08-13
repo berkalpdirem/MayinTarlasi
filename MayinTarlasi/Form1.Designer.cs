@@ -45,6 +45,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.gbTimeWarning = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblMineCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSecond)).BeginInit();
             this.gbTimeWarning.SuspendLayout();
@@ -152,7 +155,7 @@
             // lblTimeWarning
             // 
             this.lblTimeWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimeWarning.Location = new System.Drawing.Point(11, 36);
+            this.lblTimeWarning.Location = new System.Drawing.Point(6, 102);
             this.lblTimeWarning.Name = "lblTimeWarning";
             this.lblTimeWarning.Size = new System.Drawing.Size(167, 46);
             this.lblTimeWarning.TabIndex = 7;
@@ -161,52 +164,82 @@
             // lbl_Min
             // 
             this.lbl_Min.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Min.Location = new System.Drawing.Point(6, 82);
+            this.lbl_Min.Location = new System.Drawing.Point(69, 148);
             this.lbl_Min.Name = "lbl_Min";
-            this.lbl_Min.Size = new System.Drawing.Size(48, 46);
+            this.lbl_Min.Size = new System.Drawing.Size(149, 46);
             this.lbl_Min.TabIndex = 7;
             this.lbl_Min.Text = "00";
             // 
             // lbl_Sec
             // 
             this.lbl_Sec.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Sec.Location = new System.Drawing.Point(106, 82);
+            this.lbl_Sec.Location = new System.Drawing.Point(69, 184);
             this.lbl_Sec.Name = "lbl_Sec";
-            this.lbl_Sec.Size = new System.Drawing.Size(52, 46);
+            this.lbl_Sec.Size = new System.Drawing.Size(153, 46);
             this.lbl_Sec.TabIndex = 7;
             this.lbl_Sec.Text = "00";
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(53, 82);
+            this.label8.Location = new System.Drawing.Point(1, 148);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 46);
+            this.label8.Size = new System.Drawing.Size(62, 46);
             this.label8.TabIndex = 7;
-            this.label8.Text = "dk:";
+            this.label8.Text = "Dk:";
             // 
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(158, 82);
+            this.label9.Location = new System.Drawing.Point(1, 184);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 46);
+            this.label9.Size = new System.Drawing.Size(58, 46);
             this.label9.TabIndex = 7;
-            this.label9.Text = "sn";
+            this.label9.Text = "Sn:";
             // 
             // gbTimeWarning
             // 
+            this.gbTimeWarning.Controls.Add(this.label6);
+            this.gbTimeWarning.Controls.Add(this.label2);
             this.gbTimeWarning.Controls.Add(this.lblTimeWarning);
             this.gbTimeWarning.Controls.Add(this.lbl_Sec);
+            this.gbTimeWarning.Controls.Add(this.lblMineCount);
             this.gbTimeWarning.Controls.Add(this.lbl_Min);
             this.gbTimeWarning.Controls.Add(this.label9);
             this.gbTimeWarning.Controls.Add(this.label8);
-            this.gbTimeWarning.Location = new System.Drawing.Point(549, 236);
+            this.gbTimeWarning.Location = new System.Drawing.Point(549, 120);
             this.gbTimeWarning.Name = "gbTimeWarning";
-            this.gbTimeWarning.Size = new System.Drawing.Size(229, 149);
+            this.gbTimeWarning.Size = new System.Drawing.Size(239, 237);
             this.gbTimeWarning.TabIndex = 8;
             this.gbTimeWarning.TabStop = false;
             this.gbTimeWarning.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(167, 46);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "KalanSüre:";
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(1, 39);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(175, 46);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "KalanMayın:";
+            // 
+            // lblMineCount
+            // 
+            this.lblMineCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMineCount.Location = new System.Drawing.Point(170, 39);
+            this.lblMineCount.Name = "lblMineCount";
+            this.lblMineCount.Size = new System.Drawing.Size(63, 46);
+            this.lblMineCount.TabIndex = 7;
+            this.lblMineCount.Text = "000";
             // 
             // Form1
             // 
@@ -252,6 +285,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox gbTimeWarning;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMineCount;
     }
 }
 
