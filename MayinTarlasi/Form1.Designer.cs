@@ -45,8 +45,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.gbTimeWarning = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblMineCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSecond)).BeginInit();
@@ -214,15 +214,6 @@
             this.gbTimeWarning.TabStop = false;
             this.gbTimeWarning.Visible = false;
             // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 46);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "KalanSüre:";
-            // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -231,6 +222,15 @@
             this.label6.Size = new System.Drawing.Size(175, 46);
             this.label6.TabIndex = 7;
             this.label6.Text = "KalanMayın:";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(167, 46);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "KalanSüre:";
             // 
             // lblMineCount
             // 

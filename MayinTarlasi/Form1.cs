@@ -118,6 +118,7 @@ namespace MayinTarlasi
                     _field.button = btn;
                     btn.MouseDown += new MouseEventHandler(button_MouseClick);
                     
+                    
                     //btn.Text = x.ToString() + " " + y.ToString();
                     // Creating GameMatrix
                     GameMatrix[x, y] = _field;
@@ -136,7 +137,7 @@ namespace MayinTarlasi
                 {
                     MineCoordinates.Add(tempTuple);
                     GameMatrix[tempX, tempY].IsItBomb = true;
-                    GameMatrix[tempX, tempY].button.BackColor = Color.Black;
+                    //GameMatrix[tempX, tempY].button.BackColor = Color.Black;
                 }
                 else
                 {
@@ -208,11 +209,10 @@ namespace MayinTarlasi
                 if (_field.IsItBomb)
                 {
                     ShowMines();
-                    
+                    timer1.Stop();
                     if (MessageBox.Show("Booom\nKaybettiniz. Yeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    {
                         newGameSettings();
-                    }
+                    
                     // Dialog kutusunda no'ya tıklandığında uygulamadan çıkılması
                     else
                         Application.Exit();
@@ -235,6 +235,15 @@ namespace MayinTarlasi
                 if (_field.IsItBomb)
                 {
                     lblMineCount.Text = (int.Parse(lblMineCount.Text) - 1).ToString();
+                    if (lblMineCount.Text == "0")
+                    {
+                        timer1.Stop();
+                        if (MessageBox.Show("Tebrikler Kazandınız !!!\nYeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                            newGameSettings();
+                        
+                        else
+                            Application.Exit();
+                    }
                 }
             }
         }
@@ -257,7 +266,11 @@ namespace MayinTarlasi
                 timer1.Stop();
                 lbl_Sec.Text = sec.ToString();
                 lbl_Min.Text = min.ToString();
-                MessageBox.Show("Süre Bitti !!!");
+                if (MessageBox.Show("Süre bitti !!!\nKaybettiniz. Yeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    newGameSettings();
+                else
+                    Application.Exit();
+
             }
             if (sec ==0 && min > 0)
             {
