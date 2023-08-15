@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Runtime.ConstrainedExecution;
 using System.Threading;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 
 namespace MayinTarlasi
 {
@@ -23,11 +24,13 @@ namespace MayinTarlasi
             InitializeComponent();
 
         }
-
+        //--------------------------------------------------------/Global Variables/---------------------------------------------------------
         field[,] GameMatrix = new field[10, 10];
         List<(int, int)> MineCoordinates = new List<(int, int)>();
         int min;
         int sec;
+        int clearField = 0;
+        int mineCount = 0;
         Bitmap MineImage = MayinTarlasi.Properties.Resources.mine;
         Bitmap FlagImage = MayinTarlasi.Properties.Resources.flag;
 
@@ -63,7 +66,7 @@ namespace MayinTarlasi
                 }
             }
         }
-
+        
         /// <summary>
         /// Puts the given photo in the given x-y coordinates at the zoom settings
         /// </summary>
@@ -137,7 +140,7 @@ namespace MayinTarlasi
                 {
                     MineCoordinates.Add(tempTuple);
                     GameMatrix[tempX, tempY].IsItBomb = true;
-                    //GameMatrix[tempX, tempY].button.BackColor = Color.Black;
+                    GameMatrix[tempX, tempY].button.BackColor = Color.Black;
                 }
                 else
                 {
@@ -145,13 +148,17 @@ namespace MayinTarlasi
                 }
             }
         }
+        /// <summary>
+        /// Clear variables and inputs for new game
+        /// </summary>
         public void newGameSettings()
         {
+            gbInputPanel.Enabled = true;
             pnl_buttonPanel.Controls.Clear();
             MineCoordinates.Clear();
             gbTimeWarning.Visible = false;
             timer1.Stop();
-            
+        
             min = 0;
             sec = 0;
         }
@@ -171,11 +178,18 @@ namespace MayinTarlasi
         private void btn_Start_Click(object sender, EventArgs e)
         {
             newGameSettings();
+            gbInputPanel.Enabled = false;
             if (int.TryParse(tb_MineCount.Text, out int mineCount) && int.Parse(tb_MineCount.Text) < 101)
             {
-                if ((numericUpDownMin.Value < 0 || numericUpDownSecond.Value < 0) )
+                if (numericUpDownMin.Value < 0 || numericUpDownSecond.Value < 0 )
                 {
                     MessageBox.Show("Lütfen Oynayacağınız Süreyi Dakika ve Saniye Cinsinden Giriniz !!!");
+                    gbInputPanel.Enabled = true;
+                }
+                else if (numericUpDownMin.Value == 0 && numericUpDownSecond.Value < 30)
+                {
+                    MessageBox.Show("Lütfen Oynayacağınız Süreyi Minumum 30 Saniye Giriniz !!!");
+                    gbInputPanel.Enabled=true;
                 }
                 else
                 {
@@ -192,6 +206,7 @@ namespace MayinTarlasi
             else
             {
                 MessageBox.Show("Lütfen Mayın Sayısına, 0'dan 100'e Kadar Herhangi Bir Sayısal Değer Girin!!!");
+                gbInputPanel.Enabled = true;
             }
         }
 
@@ -202,35 +217,54 @@ namespace MayinTarlasi
         /// <param name="e"></param>
         private void button_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) // Sol Tıklama
+            if (e.Button == MouseButtons.Left) // Fare ile sol tıklama eventi
             {
                 Button btn = sender as Button;
                 field _field = btn.Tag as field;
+                // İlk koşul bombya oturma koşulu
                 if (_field.IsItBomb)
                 {
-                    ShowMines();
                     timer1.Stop();
-                    if (MessageBox.Show("Booom\nKaybettiniz. Yeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    MessageBox.Show("BOOM\nKaybettiniz. Mayın bilgileri 10 saniye ekranınıza yansıtılacak");
+                    ShowMines();
+                    Thread.Sleep(10000);
+                    if (MessageBox.Show("Yeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                         newGameSettings();
-                    
-                    // Dialog kutusunda no'ya tıklandığında uygulamadan çıkılması
                     else
                         Application.Exit();
                 }
-                else
+                //İkinci koşul temiz alana denk gelme koşulu
+                else if (btn.BackColor != Color.Green && !_field.IsClicked)
                 {
+                    _field.IsClicked = true;
                     btn.BackgroundImage = null;
                     btn.BackColor = Color.Green;
                     ScanFields(btn);
+                    clearField++;
+                    mineCount = int.Parse(lblMineCount.Text);
+                    if((100 - (mineCount + clearField) == 0))
+                    {
+                        timer1.Stop();
+                        if (MessageBox.Show("Tebrikler Tüm Temiz Alanları Tespit Ettiniz ve Kazandınız !!!\nYeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                            newGameSettings();
+                        else
+                            Application.Exit();
+                    }
                 }
             }
-            else if (e.Button == MouseButtons.Right) // Sağ tıklama
+            else if (e.Button == MouseButtons.Right) // Fare ile sağ tıklama eventi
             {
                 Button clickedButton = sender as Button;
                 field _field = clickedButton.Tag as field;
 
-                // Arka planı bayrak resmi ile güncelle
-                changeButtonImage(_field.x, _field.y, FlagImage);
+                if (!_field.IsClicked)
+                {
+                    // Arka planı bayrak resmi ile güncelle
+                    changeButtonImage(_field.x, _field.y, FlagImage);
+                }
+
+                _field.IsClicked = true;
+
                 // Mayın Tespit Edildiğinde MineCount azaltılır.
                 if (_field.IsItBomb)
                 {
@@ -238,7 +272,7 @@ namespace MayinTarlasi
                     if (lblMineCount.Text == "0")
                     {
                         timer1.Stop();
-                        if (MessageBox.Show("Tebrikler Kazandınız !!!\nYeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        if (MessageBox.Show("Tebrikler Tüm Mayınları Tespit Ettiniz Kazandınız !!!\nYeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                             newGameSettings();
                         
                         else
@@ -266,7 +300,10 @@ namespace MayinTarlasi
                 timer1.Stop();
                 lbl_Sec.Text = sec.ToString();
                 lbl_Min.Text = min.ToString();
-                if (MessageBox.Show("Süre bitti !!!\nKaybettiniz. Yeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                MessageBox.Show("Süre Bitti\nKaybettiniz. Mayın bilgileri 10 saniye ekranınıza yansıtılacak");
+                ShowMines();
+                Thread.Sleep(10000);
+                if (MessageBox.Show("Yeniden  Oynamak istermisiniz ?", "Bilgi Mesajı", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     newGameSettings();
                 else
                     Application.Exit();
@@ -282,10 +319,28 @@ namespace MayinTarlasi
             sec -= 1;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void btnHelp_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Mayın Tarlası oyununa hoş geldiniz.\n" +
+                            "Girilecek Mayın sayısı 0'dan 100'e kadar olmalıdır.\n" +
+                            "Girdiğiniz mayın sayısı kadar mayın haritada rastgele bir şekilde oluşur.\n" +
+                            "Oynamak istediğiniz süre 30 saniyeden büyük olamlıdır\n\n" +
+                            "2 adet kazanma ve kay betme koşulu bulunmaktadır ; \n" +
+                            "     -Farenizin sol tıklaması ile alanları açabilirsiniz.Eğer açtığınız alan mayınlı değil ise yeşile döner ve çevresinde kaç adet mayın olduğu bilgisini size geri verir.\n" +
+                            "Tüm temiz alanları açar iseniz birinci kazanma koşulunu sağlamış olursunuz.Eğer mayınlı alana sol tıklama yaparsanız mayın patlar ve kaybedersiniz.\n" +
+                            "     -Farenizin sağ tıklaması ile alana bayrak ekliyebilirsiniz. Eğer eklemiş olduğunuz bayrak mayınlı bölgeye denk gelir ise Kalan mayın sayısı 1 azaltılır.\n" +
+                            "bu şekilde tüm mayınları bulursanız ikinci kazanma koşulunu sağlamış olursunuz.\n" +
+                            "Girmiş olduğunuz süre boyunca kazanma koşullarını sağlayamassınız otomatik olarak kaybedersiniz. \n\n" +
+                            "ÖNEMLİ NOT: OYUN ALANINDA HER BUTONA SADECE BİR KERE TIKLAYABİLİRSİNİZ.BOL ŞANS :)");
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+
 
         #endregion
         //---------------------------------------------------------//---------------------------------------------------------
@@ -304,6 +359,8 @@ namespace MayinTarlasi
         public bool IsItBomb { get; set; }
 
         public Button button { get; set; }
+
+        public bool IsClicked { get; set; }
     }
 }
 

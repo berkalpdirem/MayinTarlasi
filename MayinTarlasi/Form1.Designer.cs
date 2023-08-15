@@ -48,9 +48,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblMineCount = new System.Windows.Forms.Label();
+            this.gbInputPanel = new System.Windows.Forms.GroupBox();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSecond)).BeginInit();
             this.gbTimeWarning.SuspendLayout();
+            this.gbInputPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_buttonPanel
@@ -62,7 +66,7 @@
             // 
             // btn_Start
             // 
-            this.btn_Start.Location = new System.Drawing.Point(713, 91);
+            this.btn_Start.Location = new System.Drawing.Point(0, 75);
             this.btn_Start.Name = "btn_Start";
             this.btn_Start.Size = new System.Drawing.Size(75, 23);
             this.btn_Start.TabIndex = 1;
@@ -72,7 +76,7 @@
             // 
             // tb_MineCount
             // 
-            this.tb_MineCount.Location = new System.Drawing.Point(713, 32);
+            this.tb_MineCount.Location = new System.Drawing.Point(80, 17);
             this.tb_MineCount.Name = "tb_MineCount";
             this.tb_MineCount.Size = new System.Drawing.Size(75, 20);
             this.tb_MineCount.TabIndex = 2;
@@ -80,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(639, 35);
+            this.label1.Location = new System.Drawing.Point(6, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 3;
@@ -94,7 +98,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(573, 64);
+            this.label3.Location = new System.Drawing.Point(7, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 5;
@@ -102,7 +106,7 @@
             // 
             // numericUpDownMin
             // 
-            this.numericUpDownMin.Location = new System.Drawing.Point(642, 62);
+            this.numericUpDownMin.Location = new System.Drawing.Point(76, 43);
             this.numericUpDownMin.Maximum = new decimal(new int[] {
             -469762049,
             -590869294,
@@ -119,7 +123,7 @@
             // 
             // numericUpDownSecond
             // 
-            this.numericUpDownSecond.Location = new System.Drawing.Point(713, 62);
+            this.numericUpDownSecond.Location = new System.Drawing.Point(147, 43);
             this.numericUpDownSecond.Maximum = new decimal(new int[] {
             268435455,
             1042612833,
@@ -137,7 +141,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(685, 64);
+            this.label4.Location = new System.Drawing.Point(119, 45);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(22, 13);
             this.label4.TabIndex = 5;
@@ -146,7 +150,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(756, 64);
+            this.label5.Location = new System.Drawing.Point(190, 45);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(22, 13);
             this.label5.TabIndex = 5;
@@ -207,7 +211,7 @@
             this.gbTimeWarning.Controls.Add(this.lbl_Min);
             this.gbTimeWarning.Controls.Add(this.label9);
             this.gbTimeWarning.Controls.Add(this.label8);
-            this.gbTimeWarning.Location = new System.Drawing.Point(549, 120);
+            this.gbTimeWarning.Location = new System.Drawing.Point(549, 221);
             this.gbTimeWarning.Name = "gbTimeWarning";
             this.gbTimeWarning.Size = new System.Drawing.Size(239, 237);
             this.gbTimeWarning.TabIndex = 8;
@@ -241,29 +245,60 @@
             this.lblMineCount.TabIndex = 7;
             this.lblMineCount.Text = "000";
             // 
+            // gbInputPanel
+            // 
+            this.gbInputPanel.Controls.Add(this.label1);
+            this.gbInputPanel.Controls.Add(this.btn_Start);
+            this.gbInputPanel.Controls.Add(this.numericUpDownSecond);
+            this.gbInputPanel.Controls.Add(this.tb_MineCount);
+            this.gbInputPanel.Controls.Add(this.numericUpDownMin);
+            this.gbInputPanel.Controls.Add(this.label3);
+            this.gbInputPanel.Controls.Add(this.label5);
+            this.gbInputPanel.Controls.Add(this.label4);
+            this.gbInputPanel.Location = new System.Drawing.Point(549, 33);
+            this.gbInputPanel.Name = "gbInputPanel";
+            this.gbInputPanel.Size = new System.Drawing.Size(239, 98);
+            this.gbInputPanel.TabIndex = 9;
+            this.gbInputPanel.TabStop = false;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(549, 134);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.TabIndex = 10;
+            this.btnHelp.Text = "Yardım";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(549, 163);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 10;
+            this.btnExit.Text = "Çıkış";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 539);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.gbTimeWarning);
-            this.Controls.Add(this.numericUpDownSecond);
-            this.Controls.Add(this.numericUpDownMin);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tb_MineCount);
-            this.Controls.Add(this.btn_Start);
+            this.Controls.Add(this.gbInputPanel);
             this.Controls.Add(this.pnl_buttonPanel);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSecond)).EndInit();
             this.gbTimeWarning.ResumeLayout(false);
+            this.gbInputPanel.ResumeLayout(false);
+            this.gbInputPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -288,6 +323,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblMineCount;
+        private System.Windows.Forms.GroupBox gbInputPanel;
+        private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 
